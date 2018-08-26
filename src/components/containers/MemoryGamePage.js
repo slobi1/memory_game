@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as flipCardActions from '../../actions/FlipCardActions';
 import * as gameSettingsActions from '../../actions/GameSettingsActions';
+import * as gameScoreActions from '../../actions/GameScoreActions';
 
 import Card from '../Card';
 import Select from '../Select';
@@ -52,14 +53,16 @@ export class MemoryGamePage extends React.Component {
 function mapStateToProps(state) {
   return {
     cardsFlipped: state.FlipCardReducer,
-    gameDifficulty: state.GameSettingsReducer
+    gameDifficulty: state.GameSettingsReducer,
+    gameScore: state.GameScoreReducer
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     flipCardActions: bindActionCreators(flipCardActions, dispatch),
-    gameSettingsActions: bindActionCreators(gameSettingsActions, dispatch)
+    gameSettingsActions: bindActionCreators(gameSettingsActions, dispatch),
+    gameScoreActions: bindActionCreators(gameScoreActions, dispatch)
   };
 }
 
