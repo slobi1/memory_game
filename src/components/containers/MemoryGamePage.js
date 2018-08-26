@@ -6,6 +6,7 @@ import * as flipCardActions from '../../actions/FlipCardActions';
 import * as gameSettingsActions from '../../actions/GameSettingsActions';
 
 import Card from '../Card';
+import Select from '../Select';
 
 export class MemoryGamePage extends React.Component {
   changeDifficulty = (event) => {
@@ -33,12 +34,7 @@ export class MemoryGamePage extends React.Component {
           <Card symbol={'F'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
           <Card symbol={'F'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
         </ul>
-        <label htmlFor="difficulty">Set difficulty</label>
-        <select name="difficulty" id="difficulty" onChange={this.changeDifficulty}>
-          <option value="6">6 pairs</option>
-          <option value="8">8 pairs</option>
-          <option value="10">10 pairs</option>
-        </select>
+        <Select options={[6, 8, 10]} handleChange={this.changeDifficulty} title={'Game difficulty'}/>
         <button>
           Reset game
         </button>
