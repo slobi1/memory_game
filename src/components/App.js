@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
+
+import Card from './Card';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <ul className="gridList">
-          <li>
-            A
-          </li>
-          <li>
-            A
-          </li>
+          <Card />
+          <Card />
           <li className="flipped">
             B
           </li>
