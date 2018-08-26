@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Card extends Component {
-  render() {
-    return (
-      <li>
-        A
-      </li>
-    )
-  }
-}
+const Card = (props) => {
+  return (
+    <li className={(props.flipped ? 'flipped' : '')}
+        onClick={props.handleClick}>
+      {props.symbol}
+    </li>
+  )
+};
 
 export default Card;
