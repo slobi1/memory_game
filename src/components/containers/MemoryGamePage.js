@@ -6,8 +6,8 @@ import * as flipCardActions from '../../actions/FlipCardActions';
 import * as gameSettingsActions from '../../actions/GameSettingsActions';
 import * as gameScoreActions from '../../actions/GameScoreActions';
 
-import Card from '../Card';
 import Select from '../Select';
+import Matrix from '../Matrix';
 
 export class MemoryGamePage extends React.Component {
   changeDifficulty = (event) => {
@@ -17,30 +17,19 @@ export class MemoryGamePage extends React.Component {
   render() {
     return (
       <div className="App">
-        <ul className="gridList">
-          <Card symbol={'A'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'A'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'B'} flipped={true} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'B'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-        </ul>
-        <ul className="gridList">
-          <Card symbol={'C'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'C'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'D'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'D'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-        </ul>
-        <ul className="gridList">
-          <Card symbol={'E'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'E'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'F'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-          <Card symbol={'F'} handleClick={this.props.flipCardActions.incrementFlippedCards}/>
-        </ul>
-        <Select options={[6, 8, 10]} handleChange={this.changeDifficulty} title={'Game difficulty'}/>
+        <Matrix
+          handleClick={this.props.flipCardActions.incrementFlippedCards}
+        />
+        <Select
+          options={[6, 8, 10]}
+          handleChange={this.changeDifficulty}
+          title={'Game difficulty'}
+        />
         <button>
           Reset game
         </button>
         <p>
-          Your score is: 0
+          Your score is: {this.props.gameScore}
         </p>
         <p>
           Cards flipped {this.props.cardsFlipped}
@@ -68,7 +57,8 @@ function mapDispatchToProps(dispatch) {
 
 MemoryGamePage.propTypes = {
   flipCardActions: PropTypes.object.isRequired,
-  gameSettingsActions: PropTypes.object.isRequired
+  gameSettingsActions: PropTypes.object.isRequired,
+  gameScoreActions: PropTypes.object.isRequired
 };
 
 export default connect(
