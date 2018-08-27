@@ -14,6 +14,14 @@ export class MemoryGamePage extends React.Component {
     this.resetBoard(this.props.gameSettings.complexity.pairs);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.gameSettings.cardsFlipped.keys.length >= 2) {
+      setTimeout(() => {
+        this.props.flipCardActions.flipBack();
+      }, 500);
+    }
+  }
+
   resetBoard() {
     this.props.gameSettingsActions.resetBoard(this.props.gameSettings.complexity.pairs);
     setTimeout(() => {

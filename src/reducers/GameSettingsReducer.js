@@ -26,7 +26,6 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
       newState.cardsFlipped.keys[flippedCardsCount] = action.cardKey;
       newState.cardsFlipped.locations[flippedCardsCount] = {x: action.xlocation, y: action.ylocation};
       newState.cardsFlipped.values[flippedCardsCount] = action.value;
-      newState.cardsFlipped.resolved = [];
 
       if (Object.keys(newState.cardsFlipped.keys).length === 2) {
         if (newState.cardsFlipped.values[0] === newState.cardsFlipped.values[1]) {
@@ -38,16 +37,22 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
           newState.cardsFlipped.locations = [];
           newState.cardsFlipped.keys = [];
           newState.cardsFlipped.values = [];
-        } else {
-          newState.cardsFlipped.locations.map(location => {
-            return newState.complexity.matrix.board[location.y][location.x].flipped = false;
-          });
-
-          newState.cardsFlipped.locations = [];
-          newState.cardsFlipped.keys = [];
-          newState.cardsFlipped.values = [];
         }
       }
+
+      return newState;
+    }
+
+    case actions.FLIP_BACK: {
+      const newState = Object.assign({}, state);
+
+      newState.cardsFlipped.locations.map(location => {
+        return newState.complexity.matrix.board[location.y][location.x].flipped = false;
+      });
+
+      newState.cardsFlipped.locations = [];
+      newState.cardsFlipped.keys = [];
+      newState.cardsFlipped.values = [];
 
       return newState;
     }

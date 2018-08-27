@@ -4,3 +4,4 @@ export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const RESET_BOARD = 'RESET_BOARD';
 export const REVEAL_ALL = 'REVEAL_ALL';
 export const HIDE_ALL = 'HIDE_ALL';
+export const FLIP_BACK = 'FLIP_BACK';
