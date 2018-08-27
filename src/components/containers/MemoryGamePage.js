@@ -21,7 +21,7 @@ export class MemoryGamePage extends React.Component {
   }
 
   resetGame() {
-    this.props.gameSettingsActions.resetBoard(this.props.gameSettings.pairs);
+    this.props.gameSettingsActions.resetBoard(this.props.gameSettings.complexity.pairs);
   }
 
   changeDifficulty = (event) => {
@@ -33,8 +33,8 @@ export class MemoryGamePage extends React.Component {
       <div className="App">
         <Matrix
           handleClick={this.props.flipCardActions.flipCard}
-          board={this.props.gameSettings.matrix.board}
-          matrix={{x: this.props.gameSettings.matrix.x, y: this.props.gameSettings.matrix.y}}
+          board={this.props.gameSettings.complexity.matrix.board}
+          matrix={{x: this.props.gameSettings.complexity.matrix.x, y: this.props.gameSettings.complexity.matrix.y}}
         />
         <Select
           options={[6, 8, 10]}
@@ -53,8 +53,8 @@ export class MemoryGamePage extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
-    cardsFlipped: state.FlipCardReducer.cardsFlipped,
     gameSettings: state.GameSettingsReducer,
     gameScore: state.GameScoreReducer
   };

@@ -5,6 +5,7 @@ function GenerateNewItem(symbol) {
   this.symbol = symbol;
   this.key = v4();
   this.flipped = false;
+  this.resolved = false;
 }
 
 export function getShuffled(difficulty, columns) {

@@ -2,30 +2,68 @@ import InitialState from './InitialState';
 import * as actions from '../constants/actionTypes';
 import * as utilActions from '../utils/array';
 
-export default function GameSettingsReducer(state = InitialState.complexity, action) {
+export default function GameSettingsReducer(state = InitialState.game, action) {
   switch (action.type) {
     case actions.GET_MATRIX: {
       const newState = Object.assign({}, state);
 
-      newState.pairs = action.pairs;
-      newState.matrix.x = Math.ceil(Math.sqrt(action.pairs*2));
-      newState.matrix.y = Math.floor(Math.sqrt(action.pairs*2));
+      newState.complexity.pairs = action.pairs;
+      newState.complexity.matrix.x = Math.ceil(Math.sqrt(action.pairs*2));
+      newState.complexity.matrix.y = Math.floor(Math.sqrt(action.pairs*2));
 
       return newState;
     }
 
     case actions.FLIP_CARD: {
+      const flippedCardsCount = Object.keys(state.cardsFlipped.keys).length;
+      if (flippedCardsCount === 2 || state.cardsFlipped.keys.indexOf(action.cardKey) !== -1 || state.cardsFlipped.resolved.indexOf(action.value) !== -1) {
+        return state;
+      }
+
       const newState = Object.assign({}, state);
-      newState.matrix.board[action.ylocation][action.xlocation].flipped = true;
+
+      newState.complexity.matrix.board[action.ylocation][action.xlocation].flipped = true;
+      newState.cardsFlipped.keys[flippedCardsCount] = action.cardKey;
+      newState.cardsFlipped.locations[flippedCardsCount] = {x: action.xlocation, y: action.ylocation};
+      newState.cardsFlipped.values[flippedCardsCount] = action.value;
+      newState.cardsFlipped.resolved = [];
+
+      if (Object.keys(newState.cardsFlipped.keys).length === 2) {
+        if (newState.cardsFlipped.values[0] === newState.cardsFlipped.values[1]) {
+          newState.cardsFlipped.resolved[newState.cardsFlipped.resolved.length] = action.value;
+          newState.cardsFlipped.locations.map(location => {
+            return newState.complexity.matrix.board[location.y][location.x].resolved = true;
+          });
+
+          newState.cardsFlipped.locations = [];
+          newState.cardsFlipped.keys = [];
+          newState.cardsFlipped.values = [];
+        } else {
+          newState.cardsFlipped.locations.map(location => {
+            return newState.complexity.matrix.board[location.y][location.x].flipped = false;
+          });
+
+          newState.cardsFlipped.locations = [];
+          newState.cardsFlipped.keys = [];
+          newState.cardsFlipped.values = [];
+        }
+      }
 
       return newState;
     }
 
     case actions.RESET_BOARD: {
       const newState = Object.assign({}, state);
-      const board = utilActions.getShuffled(action.difficulty, newState.matrix.x);
+      const board = utilActions.getShuffled(action.difficulty, newState.complexity.matrix.x);
 
-      newState.matrix.board = board;
+      newState.cardsFlipped = {
+        locations: [],
+        keys: [],
+        values: [],
+        resolved: []
+      };
+
+      newState.complexity.matrix.board = board;
       return newState;
     }
 

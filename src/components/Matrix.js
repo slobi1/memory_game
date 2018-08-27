@@ -19,6 +19,7 @@ const Matrix = (props) => {
                     key={item.key}
                     xlocation={colIndex}
                     ylocation={rowIndex}
+                    resolved={item.resolved}
                   />
                 )
               })

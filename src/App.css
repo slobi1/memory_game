@@ -48,3 +48,7 @@
 .gridList li.flipped {
   color: black;
 }
+
+.resolved {
+  background-color: cadetblue;
+}
