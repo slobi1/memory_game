@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <MemoryGamePage cardsFlipped='0'/>
+        <MemoryGamePage cardsFlippedCount='0'/>
       </div>
     );
   }

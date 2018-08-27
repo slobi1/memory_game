@@ -48,7 +48,7 @@ export class MemoryGamePage extends React.Component {
           Your score is: {this.props.gameScore}
         </p>
         <p>
-          Cards flipped {this.props.cardsFlipped}
+          Cards flipped {this.props.cardsFlippedCount}
         </p>
       </div>
     )
@@ -57,7 +57,7 @@ export class MemoryGamePage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    cardsFlipped: state.FlipCardReducer,
+    cardsFlippedCount: state.FlipCardReducer,
     gameDifficulty: state.GameSettingsReducer,
     gameScore: state.GameScoreReducer,
   };

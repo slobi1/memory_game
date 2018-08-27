@@ -1,5 +1,5 @@
 export default {
-  cardsFlipped: 0,
+  cardsFlippedCount: 0,
   complexity: {
     pairs: 6,
     matrix: {

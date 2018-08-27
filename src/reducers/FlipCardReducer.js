@@ -1,7 +1,7 @@
 import InitialState from './InitialState';
 import * as actions from '../constants/actionTypes';
 
-export default function FlipCardReducer(state = InitialState.cardsFlipped, action) {
+export default function FlipCardReducer(state = InitialState.cardsFlippedCount, action) {
   switch (action.type) {
     case actions.INCREMENT_FLIPPED_CARDS_COUNT: {
       let newState = state;
