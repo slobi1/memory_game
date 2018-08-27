@@ -33,6 +33,8 @@ export class MemoryGamePage extends React.Component {
       <div className="App">
         <Matrix
           handleClick={this.props.flipCardActions.incrementFlippedCards}
+          board={this.props.gameDifficulty.matrix.board}
+          matrix={{x: this.props.gameDifficulty.matrix.x, y: this.props.gameDifficulty.matrix.y}}
         />
         <Select
           options={[6, 8, 10]}
@@ -40,7 +42,7 @@ export class MemoryGamePage extends React.Component {
           title={'Game difficulty'}
         />
         <button onClick={this.resetGame}>
-          Reset game
+          Start new game
         </button>
         <p>
           Your score is: {this.props.gameScore}

@@ -1,6 +1,6 @@
 import InitialState from './InitialState';
 import * as actions from '../constants/actionTypes';
-import shuffle from 'lodash/shuffle'
+import * as utilActions from '../utils/array';
 
 export default function GameSettingsReducer(state = InitialState.complexity, action) {
   switch (action.type) {
@@ -16,18 +16,9 @@ export default function GameSettingsReducer(state = InitialState.complexity, act
 
     case actions.SET_BOARD: {
       const newState = Object.assign({}, state);
+      const board = utilActions.getShuffled(action.difficulty, newState.matrix.x);
 
-      let symbols = [];
-      let collection = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-
-      for (let i=0; i<action.difficulty; i++) {
-        let char = collection.shift();
-        symbols.push(char);
-        symbols.push(char);
-      }
-
-      newState.matrix.board = shuffle(symbols);
-
+      newState.matrix.board = board;
       return newState;
     }
 

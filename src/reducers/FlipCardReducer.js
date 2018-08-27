@@ -10,6 +10,11 @@ export default function FlipCardReducer(state = InitialState.cardsFlipped, actio
       return newState;
     }
 
+
+    case actions.SET_BOARD: {
+      return 0;
+    }
+
     default:
       return state;
   }
