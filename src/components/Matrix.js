@@ -9,9 +9,14 @@ const Matrix = (props) => {
         return (
           <ul className="gridList" key={v4()}>
             {
-              row.map(col => {
+              row.map(item => {
                 return (
-                  <Card symbol={col} flipped={true} handleClick={props.handleClick} key={v4()}/>
+                  <Card
+                    symbol={item.symbol}
+                    flipped={item.flipped}
+                    handleClick={props.handleClick}
+                    key={item.key}
+                  />
                 )
               })
             }

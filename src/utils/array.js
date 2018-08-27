@@ -1,4 +1,11 @@
 import shuffle from "lodash/shuffle";
+import {v4} from 'uuid';
+
+function GenerateNewItem(symbol) {
+  this.symbol = symbol;
+  this.key = v4();
+  this.flipped = false;
+}
 
 export function getShuffled(difficulty, columns) {
   let board = [];
@@ -7,8 +14,8 @@ export function getShuffled(difficulty, columns) {
 
   for (let i=0; i<difficulty; i++) {
     let char = collection.shift();
-    symbols.push(char);
-    symbols.push(char);
+    symbols.push(new GenerateNewItem(char));
+    symbols.push(new GenerateNewItem(char));
   }
 
   let shuffledBoard = shuffle(symbols);
