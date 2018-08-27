@@ -30,13 +30,16 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
       if (Object.keys(newState.cardsFlipped.keys).length === 2) {
         if (newState.cardsFlipped.values[0] === newState.cardsFlipped.values[1]) {
           newState.cardsFlipped.resolved[newState.cardsFlipped.resolved.length] = action.value;
-          newState.cardsFlipped.locations.map(location => {
+          newState.cardsFlipped.locations.forEach(location => {
             return newState.complexity.matrix.board[location.y][location.x].resolved = true;
           });
 
           newState.cardsFlipped.locations = [];
           newState.cardsFlipped.keys = [];
           newState.cardsFlipped.values = [];
+          newState.matched = true;
+        } else {
+          newState.matched = false;
         }
       }
 
@@ -46,13 +49,14 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
     case actions.FLIP_BACK: {
       const newState = Object.assign({}, state);
 
-      newState.cardsFlipped.locations.map(location => {
+      newState.cardsFlipped.locations.forEach(location => {
         return newState.complexity.matrix.board[location.y][location.x].flipped = false;
       });
 
       newState.cardsFlipped.locations = [];
       newState.cardsFlipped.keys = [];
       newState.cardsFlipped.values = [];
+      delete newState.matched;
 
       return newState;
     }
@@ -85,7 +89,15 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
       newState.cardsFlipped = InitialState.game.cardsFlipped;
       newState.cardsFlipped.resolved = [];
       newState.complexity.matrix.board = board;
-      
+
+      return newState;
+    }
+
+    case actions.UPDATE_SCORE: {
+      const newState = Object.assign({}, state);
+
+      delete newState.matched;
+
       return newState;
     }
 

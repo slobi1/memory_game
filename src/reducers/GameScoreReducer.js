@@ -9,6 +9,10 @@ export default function GameScoreReducer(state = InitialState.score, action) {
       return newState;
     }
 
+    case actions.RESET_SCORE: {
+      return 0;
+    }
+
     default:
       return state;
   }

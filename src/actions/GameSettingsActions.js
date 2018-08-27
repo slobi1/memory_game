@@ -24,3 +24,9 @@ export function hideAll() {
     type: types.HIDE_ALL,
   }
 }
+
+export function resetMatched() {
+  return {
+    type: types.RESET_MATCHED
+  }
+}

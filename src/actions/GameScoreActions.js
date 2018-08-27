@@ -6,3 +6,9 @@ export function updateScore(points) {
     points
   }
 }
+
+export function resetScore() {
+  return {
+    type: types.RESET_SCORE
+  }
+}

@@ -20,10 +20,17 @@ export class MemoryGamePage extends React.Component {
         this.props.flipCardActions.flipBack();
       }, 500);
     }
+
+    if (nextProps.gameSettings.matched) {
+      this.props.gameScoreActions.updateScore(10);
+    } else if (nextProps.gameSettings.matched === false){
+      this.props.gameScoreActions.updateScore(-2);
+    }
   }
 
   resetBoard() {
     this.props.gameSettingsActions.resetBoard(this.props.gameSettings.complexity.pairs);
+    this.props.gameScoreActions.resetScore();
     setTimeout(() => {
       this.props.gameSettingsActions.hideAll();
     }, 1500)

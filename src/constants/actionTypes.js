@@ -5,3 +5,5 @@ export const RESET_BOARD = 'RESET_BOARD';
 export const REVEAL_ALL = 'REVEAL_ALL';
 export const HIDE_ALL = 'HIDE_ALL';
 export const FLIP_BACK = 'FLIP_BACK';
+export const RESET_MATCHED = 'RESET_MATCHED';
+export const RESET_SCORE = 'RESET_SCORE';
