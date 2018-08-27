@@ -1,4 +1,4 @@
-export const INCREMENT_FLIPPED_CARDS_COUNT = 'INCREMENT_FLIPPED_CARDS_COUNT';
+export const FLIP_CARD = 'FLIP_CARD';
 export const GET_MATRIX = 'GET_MATRIX';
 export const UPDATE_SCORE = 'UPDATE_SCORE';
-export const SET_BOARD = 'SET_BOARD';
+export const RESET_BOARD = 'RESET_BOARD';

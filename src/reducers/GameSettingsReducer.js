@@ -14,7 +14,14 @@ export default function GameSettingsReducer(state = InitialState.complexity, act
       return newState;
     }
 
-    case actions.SET_BOARD: {
+    case actions.FLIP_CARD: {
+      const newState = Object.assign({}, state);
+      newState.matrix.board[action.ylocation][action.xlocation].flipped = true;
+
+      return newState;
+    }
+
+    case actions.RESET_BOARD: {
       const newState = Object.assign({}, state);
       const board = utilActions.getShuffled(action.difficulty, newState.matrix.x);
 

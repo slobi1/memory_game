@@ -5,17 +5,20 @@ import {v4} from 'uuid';
 const Matrix = (props) => {
   return (
     <div>
-      {props.board.map(row => {
+      {props.board.map((row, rowIndex) => {
         return (
           <ul className="gridList" key={v4()}>
             {
-              row.map(item => {
+              row.map((item, colIndex)=> {
                 return (
                   <Card
                     symbol={item.symbol}
                     flipped={item.flipped}
                     handleClick={props.handleClick}
+                    uniquekey={item.key}
                     key={item.key}
+                    xlocation={colIndex}
+                    ylocation={rowIndex}
                   />
                 )
               })

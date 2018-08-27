@@ -6,9 +6,9 @@ export function getMatrix(pairs) {
     pairs
   }
 }
-export function setBoard(difficulty) {
+export function resetBoard(difficulty) {
   return {
-    type: types.SET_BOARD,
+    type: types.RESET_BOARD,
     difficulty
   }
 }

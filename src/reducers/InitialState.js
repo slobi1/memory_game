@@ -1,5 +1,12 @@
 export default {
-  cardsFlippedCount: 0,
+  cardsFlipped: {
+    count: 0,
+    location: {
+      x: '',
+      y: ''
+    },
+    key: ''
+  },
   complexity: {
     pairs: 6,
     matrix: {

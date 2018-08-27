@@ -1,7 +1,10 @@
 import * as types from '../constants/actionTypes';
 
-export function incrementFlippedCards() {
+export function flipCard(cardKey, xlocation, ylocation) {
   return {
-    type: types.INCREMENT_FLIPPED_CARDS_COUNT
+    type: types.FLIP_CARD,
+    cardKey,
+    xlocation,
+    ylocation
   }
 }
