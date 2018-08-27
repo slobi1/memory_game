@@ -83,8 +83,9 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
       const board = utilActions.getShuffled(action.difficulty, newState.complexity.matrix.x);
 
       newState.cardsFlipped = InitialState.game.cardsFlipped;
-
+      newState.cardsFlipped.resolved = [];
       newState.complexity.matrix.board = board;
+      
       return newState;
     }
 
