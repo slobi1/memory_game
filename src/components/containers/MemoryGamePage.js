@@ -10,18 +10,15 @@ import Select from '../Select';
 import Matrix from '../Matrix';
 
 export class MemoryGamePage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.resetGame = this.resetGame.bind(this);
-  }
-
   componentDidMount() {
-    this.resetGame();
+    this.resetBoard(this.props.gameSettings.complexity.pairs);
   }
 
-  resetGame() {
+  resetBoard() {
     this.props.gameSettingsActions.resetBoard(this.props.gameSettings.complexity.pairs);
+    setTimeout(() => {
+      this.props.gameSettingsActions.hideAll();
+    }, 1500)
   }
 
   changeDifficulty = (event) => {
@@ -41,7 +38,7 @@ export class MemoryGamePage extends React.Component {
           handleChange={this.changeDifficulty}
           title={'Game difficulty'}
         />
-        <button onClick={this.resetGame}>
+        <button onClick={() => this.resetBoard()}>
           Start new game
         </button>
         <p>
@@ -53,7 +50,6 @@ export class MemoryGamePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     gameSettings: state.GameSettingsReducer,
     gameScore: state.GameScoreReducer

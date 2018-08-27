@@ -4,7 +4,7 @@ import {v4} from 'uuid';
 function GenerateNewItem(symbol) {
   this.symbol = symbol;
   this.key = v4();
-  this.flipped = false;
+  this.flipped = true;
   this.resolved = false;
 }
 

@@ -52,6 +52,27 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
       return newState;
     }
 
+    case actions.REVEAL_ALL: {
+      const newState = Object.assign({}, state);
+
+      return newState.complexity.matrix.board.map(card => {
+        return card.flipped = true;
+      });
+    }
+
+    case actions.HIDE_ALL: {
+      const newState = Object.assign({}, state);
+
+      newState.complexity.matrix.board.map(row => {
+        return row.map(col => {
+          col.flipped = false;
+          return col;
+        });
+      });
+
+      return newState;
+    }
+
     case actions.RESET_BOARD: {
       const newState = Object.assign({}, state);
       const board = utilActions.getShuffled(action.difficulty, newState.complexity.matrix.x);

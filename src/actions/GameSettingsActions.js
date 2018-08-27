@@ -12,3 +12,15 @@ export function resetBoard(difficulty) {
     difficulty
   }
 }
+
+export function revealAll() {
+  return {
+    type: types.REVEAL_ALL,
+  }
+}
+
+export function hideAll() {
+  return {
+    type: types.HIDE_ALL,
+  }
+}
