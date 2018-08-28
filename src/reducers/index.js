@@ -4,10 +4,13 @@ import GameScoreReducer from './GameScoreReducer';
 
 import ComplexityReducer from './ComplexityReducer';
 
+import HighScoreReducer from './HighScoreReducer';
+
 const rootReducer = combineReducers({
   GameSettingsReducer,
   GameScoreReducer,
-  ComplexityReducer
+  ComplexityReducer,
+  HighScoreReducer
 });
 
 export default rootReducer;

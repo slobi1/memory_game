@@ -1,6 +1,14 @@
 import React from 'react';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as highScoreActions from "../../actions/HighScoreActions";
 
-export default class HighScorePage extends React.Component {
+export class HighScorePage extends React.Component {
+  componentDidMount() {
+    this.props.highScoreActions.fetchScores();
+    this.props.highScoreActions.addScore({bob: 10});
+  }
+
   render() {
     return (
       <div>
@@ -9,3 +17,20 @@ export default class HighScorePage extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    gameSettings: state.HighScoreReducer
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    highScoreActions: bindActionCreators(highScoreActions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HighScorePage);
