@@ -7,19 +7,24 @@ import * as gameSettingsActions from '../../actions/GameSettingsActions';
 import * as gameScoreActions from '../../actions/GameScoreActions';
 import * as complexityActions from '../../actions/ComplexityActions';
 import * as enableGameActions from '../../actions/EnableGameActions';
+import * as boardActions from '../../actions/BoardActions';
 
 import Select from '../Select';
 import Matrix from '../Matrix';
 
 export class MemoryGamePage extends React.Component {
   componentDidMount() {
-    this.resetBoard(this.props.complexity.pairs);
+    this.resetBoard();
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.gameSettings.cardsFlipped.keys.length >= 2) {
+    if (nextProps.gameSettings.matched) {
+      this.props.boardActions.setCardToResolved(this.props.gameSettings.locations);
+    }
+    
+    if(nextProps.gameSettings.values.length >= 2) {
       setTimeout(() => {
-        this.props.flipCardActions.flipBack();
+        this.props.flipCardActions.flipBack(this.props.gameSettings.locations);
       }, 500);
     }
 
@@ -29,7 +34,7 @@ export class MemoryGamePage extends React.Component {
       this.props.gameScoreActions.updateScore(-2);
     }
 
-    if (nextProps.gameSettings.cardsFlipped.resolved.length === this.props.complexity.pairs && nextProps.gameScore !== this.props.gameScore) {
+    if (nextProps.gameSettings.resolved.length === this.props.complexity.pairs && nextProps.gameScore !== this.props.gameScore) {
       setTimeout(() => {
         if (nextProps.gameScore >= 0) {
           alert('you won');
@@ -42,7 +47,7 @@ export class MemoryGamePage extends React.Component {
 
   resetBoard() {
     this.props.enableGameActions.disableGame();
-    this.props.gameSettingsActions.resetBoard(this.props.complexity.pairs);
+    this.props.boardActions.resetBoard(this.props.complexity.pairs, this.props.gameSettings.complexity.matrix.x);
     this.props.gameScoreActions.resetScore();
     setTimeout(() => {
       this.props.gameSettingsActions.hideAll();
@@ -61,7 +66,7 @@ export class MemoryGamePage extends React.Component {
         <Matrix
           enableGame={this.props.enableGame}
           handleClick={this.props.flipCardActions.flipCard}
-          board={this.props.gameSettings.complexity.matrix.board}
+          board={this.props.board}
         />
         <Select
           options={[6, 8, 10]}
@@ -84,7 +89,8 @@ function mapStateToProps(state) {
     gameSettings: state.GameSettingsReducer,
     gameScore: state.GameScoreReducer,
     complexity: state.ComplexityReducer,
-    enableGame: state.EnableGameReducer
+    enableGame: state.EnableGameReducer,
+    board: state.BoardReducer
   };
 }
 
@@ -94,7 +100,8 @@ function mapDispatchToProps(dispatch) {
     gameSettingsActions: bindActionCreators(gameSettingsActions, dispatch),
     gameScoreActions: bindActionCreators(gameScoreActions, dispatch),
     complexityActions: bindActionCreators(complexityActions, dispatch),
-    enableGameActions: bindActionCreators(enableGameActions, dispatch)
+    enableGameActions: bindActionCreators(enableGameActions, dispatch),
+    boardActions: bindActionCreators(boardActions, dispatch)
   };
 }
 

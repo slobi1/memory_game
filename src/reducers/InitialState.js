@@ -1,19 +1,16 @@
 export default {
-  game: {
-    cardsFlipped: {
-      resolved: [],
-      locations: [],
-      keys: [],
-      values: []
-    },
-    complexity: {
-      pairs: 6,
-      matrix: {
-        x: 4,
-        y: 3,
-        board: []
-      }
+  resolved: [],
+  locations: [],
+  keys: [],
+  values: [],
+  complexity: {
+    pairs: 6,
+    matrix: {
+      x: 4,
+      y: 3,
+      board: []
     }
   },
+  board: [],
   score: 0
 }

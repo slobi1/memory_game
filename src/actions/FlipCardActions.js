@@ -10,8 +10,9 @@ export function flipCard(cardKey, xlocation, ylocation, value) {
   }
 }
 
-export function flipBack() {
+export function flipBack(locations) {
   return {
-    type: types.FLIP_BACK
+    type: types.FLIP_BACK,
+    locations
   }
 }

@@ -1,7 +1,7 @@
 import InitialState from "./InitialState";
 import * as actions from "../constants/actionTypes";
 
-export default function ComplexityReducer(state = InitialState.game.complexity, action) {
+export default function ComplexityReducer(state = InitialState.complexity, action) {
   switch (action.type) {
     case actions.GET_PAIRS: {
       const newState = Object.assign({}, state);
