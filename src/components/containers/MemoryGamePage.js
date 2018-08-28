@@ -6,12 +6,14 @@ import * as flipCardActions from '../../actions/FlipCardActions';
 import * as gameSettingsActions from '../../actions/GameSettingsActions';
 import * as gameScoreActions from '../../actions/GameScoreActions';
 
+import * as complexityActions from '../../actions/ComplexityActions';
+
 import Select from '../Select';
 import Matrix from '../Matrix';
 
 export class MemoryGamePage extends React.Component {
   componentDidMount() {
-    this.resetBoard(this.props.gameSettings.complexity.pairs);
+    this.resetBoard(this.props.complexity.pairs);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,7 +31,7 @@ export class MemoryGamePage extends React.Component {
   }
 
   resetBoard() {
-    this.props.gameSettingsActions.resetBoard(this.props.gameSettings.complexity.pairs);
+    this.props.gameSettingsActions.resetBoard(this.props.complexity.pairs);
     this.props.gameScoreActions.resetScore();
     setTimeout(() => {
       this.props.gameSettingsActions.hideAll();
@@ -37,7 +39,8 @@ export class MemoryGamePage extends React.Component {
   }
 
   changeDifficulty = (event) => {
-    this.props.gameSettingsActions.getMatrix(event.target.value);
+    this.props.complexityActions.getPairs(event.target.value);
+    this.props.complexityActions.getMatrix(event.target.value);
   }
 
   render() {
@@ -67,7 +70,8 @@ export class MemoryGamePage extends React.Component {
 function mapStateToProps(state) {
   return {
     gameSettings: state.GameSettingsReducer,
-    gameScore: state.GameScoreReducer
+    gameScore: state.GameScoreReducer,
+    complexity: state.ComplexityReducer
   };
 }
 
@@ -75,7 +79,9 @@ function mapDispatchToProps(dispatch) {
   return {
     flipCardActions: bindActionCreators(flipCardActions, dispatch),
     gameSettingsActions: bindActionCreators(gameSettingsActions, dispatch),
-    gameScoreActions: bindActionCreators(gameScoreActions, dispatch)
+    gameScoreActions: bindActionCreators(gameScoreActions, dispatch),
+
+    complexityActions: bindActionCreators(complexityActions, dispatch)
   };
 }
 

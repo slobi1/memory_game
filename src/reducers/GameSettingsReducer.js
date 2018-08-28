@@ -4,16 +4,6 @@ import * as utilActions from '../utils/array';
 
 export default function GameSettingsReducer(state = InitialState.game, action) {
   switch (action.type) {
-    case actions.GET_MATRIX: {
-      const newState = Object.assign({}, state);
-
-      newState.complexity.pairs = action.pairs;
-      newState.complexity.matrix.x = Math.ceil(Math.sqrt(action.pairs*2));
-      newState.complexity.matrix.y = Math.floor(Math.sqrt(action.pairs*2));
-
-      return newState;
-    }
-
     case actions.FLIP_CARD: {
       const flippedCardsCount = Object.keys(state.cardsFlipped.keys).length;
       if (flippedCardsCount === 2 || state.cardsFlipped.keys.indexOf(action.cardKey) !== -1 || state.cardsFlipped.resolved.indexOf(action.value) !== -1) {
@@ -38,7 +28,6 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
           newState.cardsFlipped.locations = [];
           newState.cardsFlipped.keys = [];
           newState.cardsFlipped.values = [];
-          console.log(newState.cardsFlipped);
           newState.matched = true;
         } else {
           newState.matched = false;
