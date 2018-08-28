@@ -23,6 +23,7 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
       const newState = Object.assign({}, state);
 
       newState.complexity.matrix.board[action.ylocation][action.xlocation].flipped = true;
+
       newState.cardsFlipped.keys[flippedCardsCount] = action.cardKey;
       newState.cardsFlipped.locations[flippedCardsCount] = {x: action.xlocation, y: action.ylocation};
       newState.cardsFlipped.values[flippedCardsCount] = action.value;
@@ -37,6 +38,7 @@ export default function GameSettingsReducer(state = InitialState.game, action) {
           newState.cardsFlipped.locations = [];
           newState.cardsFlipped.keys = [];
           newState.cardsFlipped.values = [];
+          console.log(newState.cardsFlipped);
           newState.matched = true;
         } else {
           newState.matched = false;

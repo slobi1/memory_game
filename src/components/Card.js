@@ -7,7 +7,7 @@ const Card = (props) => {
         xlocation={props.xlocation}
         ylocation={props.ylocation}
         uniquekey={props.uniquekey}>
-      {props.symbol}
+      <i className={"fas " + props.symbol}></i>
     </li>
   )
 };

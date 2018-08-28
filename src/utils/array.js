@@ -11,7 +11,18 @@ function GenerateNewItem(symbol) {
 export function getShuffled(difficulty, columns) {
   let board = [];
   let symbols = [];
-  let collection = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  let collection = [
+    'fa-truck-monster',
+    'fa-apple-alt',
+    'fa-atom-alt',
+    'fa-bus-school',
+    'fa-graduation-cap',
+    'fa-laptop-code',
+    'fa-poop',
+    'fa-theater-masks',
+    'fa-oil-can',
+    'fa-diploma'
+  ];
 
   for (let i=0; i<difficulty; i++) {
     let char = collection.shift();
