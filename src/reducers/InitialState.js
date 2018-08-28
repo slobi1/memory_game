@@ -1,7 +1,6 @@
 export default {
   resolved: [],
   locations: [],
-  keys: [],
   values: [],
   complexity: {
     pairs: 6,

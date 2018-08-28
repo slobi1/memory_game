@@ -12,6 +12,7 @@ const Matrix = (props) => {
               row.map((item, colIndex)=> {
                 return (
                   <Card
+                    cardsFlipped={props.cardsFlipped}
                     enableGame={props.enableGame}
                     symbol={item.symbol}
                     flipped={item.flipped}

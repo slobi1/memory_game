@@ -8,7 +8,6 @@ import * as gameScoreActions from '../../actions/GameScoreActions';
 import * as complexityActions from '../../actions/ComplexityActions';
 import * as enableGameActions from '../../actions/EnableGameActions';
 import * as boardActions from '../../actions/BoardActions';
-
 import Select from '../Select';
 import Matrix from '../Matrix';
 
@@ -21,7 +20,7 @@ export class MemoryGamePage extends React.Component {
     if (nextProps.gameSettings.matched) {
       this.props.boardActions.setCardToResolved(this.props.gameSettings.locations);
     }
-    
+
     if(nextProps.gameSettings.values.length >= 2) {
       setTimeout(() => {
         this.props.flipCardActions.flipBack(this.props.gameSettings.locations);
@@ -67,6 +66,7 @@ export class MemoryGamePage extends React.Component {
           enableGame={this.props.enableGame}
           handleClick={this.props.flipCardActions.flipCard}
           board={this.props.board}
+          cardsFlipped={this.props.gameSettings.values.length}
         />
         <Select
           options={[6, 8, 10]}

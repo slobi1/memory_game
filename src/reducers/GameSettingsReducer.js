@@ -4,23 +4,17 @@ import * as actions from '../constants/actionTypes';
 export default function GameSettingsReducer(state = InitialState, action) {
   switch (action.type) {
     case actions.FLIP_CARD: {
-      const flippedCardsCount = Object.keys(state.values).length;
-      if (flippedCardsCount === 2 || state.keys.indexOf(action.cardKey) !== -1 || state.resolved.indexOf(action.value) !== -1) {
-        return state;
-      }
-
       const newState = Object.assign({}, state);
+      const flippedCardsCount = Object.keys(state.values).length;
 
-      newState.keys[flippedCardsCount] = action.cardKey;
       newState.locations[flippedCardsCount] = {x: action.xlocation, y: action.ylocation};
       newState.values[flippedCardsCount] = action.value;
 
-      if (Object.keys(newState.keys).length === 2) {
+      if (newState.values.length === 2) {
         if (newState.values[0] === newState.values[1]) {
           newState.resolved[newState.resolved.length] = action.value;
 
           newState.locations = [];
-          newState.keys = [];
           newState.values = [];
           newState.matched = true;
         } else {
@@ -35,7 +29,6 @@ export default function GameSettingsReducer(state = InitialState, action) {
       const newState = Object.assign({}, state);
 
       newState.locations = [];
-      newState.keys = [];
       newState.values = [];
       delete newState.matched;
 
