@@ -17,9 +17,9 @@ export default class Root extends Component {
         <BrowserRouter>
           <App>
             <Switch>
-              <Route path={pageRouteConstants.MEMORY_GAME_PAGE} component={MemoryGamePage} />
+              <Route path={pageRouteConstants.MEMORY_GAME_PAGE} component={MemoryGamePage} exact/>
               <Route path={pageRouteConstants.HIGH_SCORES_PAGE} component={HighScorePage} />
-              <Route path="*" component={NotFoundPage} />
+              <Route path={pageRouteConstants.NOT_FOUND_PAGE} component={NotFoundPage} />
             </Switch>
           </App>
         </BrowserRouter>
