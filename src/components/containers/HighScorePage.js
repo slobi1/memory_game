@@ -2,17 +2,49 @@ import React from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as highScoreActions from "../../actions/HighScoreActions";
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 export class HighScorePage extends React.Component {
-  componentDidMount() {
-    this.props.highScoreActions.fetchScores();
-    this.props.highScoreActions.addScore({bob: 10});
-  }
-
   render() {
     return (
-      <div>
-        High score page
+      <div className="App">
+        <Grid container spacing={16}>
+          <Grid item xs={12}>
+            <h2>Score table</h2>
+            <Divider light />
+          </Grid>
+          <Grid xs={4} item></Grid>
+          <Grid xs={4} item>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>
+                    Name
+                  </TableCell>
+                  <TableCell numeric>
+                    Score
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    Slobodan Boba Djordjevic
+                  </TableCell>
+                  <TableCell numeric>
+                    100
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Grid>
+        </Grid>
       </div>
     )
   }

@@ -8,12 +8,23 @@ import * as gameScoreActions from '../../actions/GameScoreActions';
 import * as complexityActions from '../../actions/ComplexityActions';
 import * as enableGameActions from '../../actions/EnableGameActions';
 import * as boardActions from '../../actions/BoardActions';
-import Select from '../Select';
-import Matrix from '../Matrix';
+import Select from '../SelectComponent';
+import Matrix from '../MatrixComponent';
+import SaveScoreDialogComponent from '../SaveScoreDialogComponent';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 export class MemoryGamePage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dialogOpened: false,
+      dialogTitle: '',
+      dialogText: ''
+    }
+  }
+
   componentDidMount() {
     this.resetBoard();
   }
@@ -35,9 +46,16 @@ export class MemoryGamePage extends React.Component {
     if (nextProps.gameSettings.resolved.length === this.props.complexity.pairs && nextProps.gameScore !== this.props.gameScore) {
       setTimeout(() => {
         if (nextProps.gameScore >= 0) {
-          alert('you won');
+          this.setState({
+            dialogOpened: true,
+            dialogTitle: 'Congratulations!',
+            dialogText: `You won. Your score is ${this.props.gameScore}. Enter your name to save your score.`
+          });
         } else {
-          alert('you lost');
+          this.setState({
+            dialogOpened: true,
+            dialogTitle: 'You lost :('
+          });
         }
       });
     }
@@ -50,7 +68,7 @@ export class MemoryGamePage extends React.Component {
     setTimeout(() => {
       this.props.gameSettingsActions.hideAll();
       this.props.enableGameActions.enableGame();
-    }, 1500)
+    }, 1000)
   }
 
   changeDifficulty = (event) => {
@@ -58,9 +76,20 @@ export class MemoryGamePage extends React.Component {
     this.props.complexityActions.getMatrix(event.target.value);
   }
 
+  handleCloseDialog = () => {
+    this.setState({ dialogOpened: false });
+  };
+
   render() {
     return (
       <div className="App">
+        <SaveScoreDialogComponent
+          handleClose={this.handleCloseDialog}
+          title={this.state.dialogTitle}
+          message={this.state.dialogText}
+          dialogOpened={this.state.dialogOpened}
+          gameScore={this.props.gameScore}
+        />
         <Grid container spacing={16}>
           <Grid item lg={6} md={8} sm={8}>
             <Matrix

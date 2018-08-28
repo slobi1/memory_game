@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import App from './App';
-import MemoryGamePage from './containers/MemoryGamePage';
-import HighScorePage from './containers/HighScorePage';
-import NotFoundPage from './containers/NotFoundPage';
-import * as pageRouteConstants from '../constants/pageRoutesContants';
+import App from '../App';
+import MemoryGamePage from './MemoryGamePage';
+import HighScorePage from './HighScorePage';
+import NotFoundPage from './NotFoundPage';
+import * as pageRouteConstants from '../../constants/pageRoutesContants';
 
 
 export default class Root extends Component {
