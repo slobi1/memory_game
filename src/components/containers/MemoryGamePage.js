@@ -80,7 +80,6 @@ function mapDispatchToProps(dispatch) {
     flipCardActions: bindActionCreators(flipCardActions, dispatch),
     gameSettingsActions: bindActionCreators(gameSettingsActions, dispatch),
     gameScoreActions: bindActionCreators(gameScoreActions, dispatch),
-
     complexityActions: bindActionCreators(complexityActions, dispatch)
   };
 }
