@@ -105,7 +105,11 @@ function mapDispatchToProps(dispatch) {
 MemoryGamePage.propTypes = {
   flipCardActions: PropTypes.object.isRequired,
   gameSettingsActions: PropTypes.object.isRequired,
-  gameScoreActions: PropTypes.object.isRequired
+  gameScoreActions: PropTypes.object.isRequired,
+  gameScore: PropTypes.string.isRequired,
+  complexity: PropTypes.object.isRequired,
+  enableGame: PropTypes.bool.isRequired,
+  board: PropTypes.array.isRequired
 };
 
 export default connect(
