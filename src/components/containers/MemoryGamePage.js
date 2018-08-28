@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import * as flipCardActions from '../../actions/FlipCardActions';
 import * as gameSettingsActions from '../../actions/GameSettingsActions';
 import * as gameScoreActions from '../../actions/GameScoreActions';
-
 import * as complexityActions from '../../actions/ComplexityActions';
+import * as enableGameActions from '../../actions/EnableGameActions';
 
 import Select from '../Select';
 import Matrix from '../Matrix';
@@ -16,7 +16,7 @@ export class MemoryGamePage extends React.Component {
     this.resetBoard(this.props.complexity.pairs);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillUpdate(nextProps) {
     if(nextProps.gameSettings.cardsFlipped.keys.length >= 2) {
       setTimeout(() => {
         this.props.flipCardActions.flipBack();
@@ -28,13 +28,25 @@ export class MemoryGamePage extends React.Component {
     } else if (nextProps.gameSettings.matched === false){
       this.props.gameScoreActions.updateScore(-2);
     }
+
+    if (nextProps.gameSettings.cardsFlipped.resolved.length === this.props.complexity.pairs && nextProps.gameScore !== this.props.gameScore) {
+      setTimeout(() => {
+        if (nextProps.gameScore >= 0) {
+          alert('you won');
+        } else {
+          alert('you lost');
+        }
+      });
+    }
   }
 
   resetBoard() {
+    this.props.enableGameActions.disableGame();
     this.props.gameSettingsActions.resetBoard(this.props.complexity.pairs);
     this.props.gameScoreActions.resetScore();
     setTimeout(() => {
       this.props.gameSettingsActions.hideAll();
+      this.props.enableGameActions.enableGame();
     }, 1500)
   }
 
@@ -47,9 +59,9 @@ export class MemoryGamePage extends React.Component {
     return (
       <div className="App">
         <Matrix
+          enableGame={this.props.enableGame}
           handleClick={this.props.flipCardActions.flipCard}
           board={this.props.gameSettings.complexity.matrix.board}
-          matrix={{x: this.props.gameSettings.complexity.matrix.x, y: this.props.gameSettings.complexity.matrix.y}}
         />
         <Select
           options={[6, 8, 10]}
@@ -71,7 +83,8 @@ function mapStateToProps(state) {
   return {
     gameSettings: state.GameSettingsReducer,
     gameScore: state.GameScoreReducer,
-    complexity: state.ComplexityReducer
+    complexity: state.ComplexityReducer,
+    enableGame: state.EnableGameReducer
   };
 }
 
@@ -80,7 +93,8 @@ function mapDispatchToProps(dispatch) {
     flipCardActions: bindActionCreators(flipCardActions, dispatch),
     gameSettingsActions: bindActionCreators(gameSettingsActions, dispatch),
     gameScoreActions: bindActionCreators(gameScoreActions, dispatch),
-    complexityActions: bindActionCreators(complexityActions, dispatch)
+    complexityActions: bindActionCreators(complexityActions, dispatch),
+    enableGameActions: bindActionCreators(enableGameActions, dispatch)
   };
 }
 
