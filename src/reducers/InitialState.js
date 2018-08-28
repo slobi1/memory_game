@@ -1,7 +1,9 @@
 export default {
-  resolved: [],
-  locations: [],
-  values: [],
+  settings: {
+    resolved: [],
+    locations: [],
+    values: []
+  },
   complexity: {
     pairs: 6,
     matrix: {

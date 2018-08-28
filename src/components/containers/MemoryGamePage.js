@@ -10,6 +10,8 @@ import * as enableGameActions from '../../actions/EnableGameActions';
 import * as boardActions from '../../actions/BoardActions';
 import Select from '../Select';
 import Matrix from '../Matrix';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 export class MemoryGamePage extends React.Component {
   componentDidMount() {
@@ -43,7 +45,7 @@ export class MemoryGamePage extends React.Component {
 
   resetBoard = () => {
     this.props.enableGameActions.disableGame();
-    this.props.boardActions.resetBoard(this.props.complexity.pairs, this.props.gameSettings.complexity.matrix.x);
+    this.props.boardActions.resetBoard(this.props.complexity.pairs, this.props.complexity.matrix.x);
     this.props.gameScoreActions.resetScore();
     setTimeout(() => {
       this.props.gameSettingsActions.hideAll();
@@ -59,23 +61,30 @@ export class MemoryGamePage extends React.Component {
   render() {
     return (
       <div className="App">
-        <Matrix
-          enableGame={this.props.enableGame}
-          handleClick={this.props.flipCardActions.flipCard}
-          board={this.props.board}
-          cardsFlipped={this.props.gameSettings.values.length}
-        />
-        <Select
-          options={[6, 8, 10]}
-          handleChange={this.changeDifficulty}
-          title={'Game difficulty'}
-        />
-        <button onClick={() => this.resetBoard()}>
-          Start new game
-        </button>
-        <p>
-          Your score is: {this.props.gameScore}
-        </p>
+        <Grid container spacing={16}>
+          <Grid item lg={6} md={8} sm={8}>
+            <Matrix
+              enableGame={this.props.enableGame}
+              handleClick={this.props.flipCardActions.flipCard}
+              board={this.props.board}
+              cardsFlipped={this.props.gameSettings.values.length}
+            />
+          </Grid>
+          <Grid item lg={2} md={4} sm={4}>
+            <Button onClick={() => this.resetBoard()} variant="outlined" color="primary">
+              Start game
+            </Button>
+            <h1>
+              Score: {this.props.gameScore}
+            </h1>
+            <Select
+              options={[6, 8, 10]}
+              value={this.props.complexity.pairs}
+              handleChange={this.changeDifficulty}
+              title={'Game difficulty'}
+            />
+          </Grid>
+        </Grid>
       </div>
     )
   }
@@ -106,7 +115,7 @@ MemoryGamePage.propTypes = {
   flipCardActions: PropTypes.object.isRequired,
   gameSettingsActions: PropTypes.object.isRequired,
   gameScoreActions: PropTypes.object.isRequired,
-  gameScore: PropTypes.string.isRequired,
+  gameScore: PropTypes.number.isRequired,
   complexity: PropTypes.object.isRequired,
   enableGame: PropTypes.bool.isRequired,
   board: PropTypes.array.isRequired

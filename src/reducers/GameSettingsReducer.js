@@ -1,7 +1,7 @@
 import InitialState from './InitialState';
 import * as actions from '../constants/actionTypes';
 
-export default function GameSettingsReducer(state = InitialState, action) {
+export default function GameSettingsReducer(state = InitialState.settings, action) {
   switch (action.type) {
     case actions.FLIP_CARD: {
       const newState = Object.assign({}, state);
