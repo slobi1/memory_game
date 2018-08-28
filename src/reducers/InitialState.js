@@ -6,8 +6,7 @@ export default {
     pairs: 6,
     matrix: {
       x: 4,
-      y: 3,
-      board: []
+      y: 3
     }
   },
   board: [],

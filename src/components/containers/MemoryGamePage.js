@@ -17,10 +17,6 @@ export class MemoryGamePage extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.gameSettings.matched) {
-      this.props.boardActions.setCardToResolved(this.props.gameSettings.locations);
-    }
-
     if(nextProps.gameSettings.values.length >= 2) {
       setTimeout(() => {
         this.props.flipCardActions.flipBack(this.props.gameSettings.locations);
@@ -28,6 +24,7 @@ export class MemoryGamePage extends React.Component {
     }
 
     if (nextProps.gameSettings.matched) {
+      this.props.boardActions.setCardToResolved(this.props.gameSettings.locations);
       this.props.gameScoreActions.updateScore(10);
     } else if (nextProps.gameSettings.matched === false){
       this.props.gameScoreActions.updateScore(-2);
@@ -44,7 +41,7 @@ export class MemoryGamePage extends React.Component {
     }
   }
 
-  resetBoard() {
+  resetBoard = () => {
     this.props.enableGameActions.disableGame();
     this.props.boardActions.resetBoard(this.props.complexity.pairs, this.props.gameSettings.complexity.matrix.x);
     this.props.gameScoreActions.resetScore();
