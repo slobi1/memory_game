@@ -4,8 +4,8 @@ import GameScoreReducer from './GameScoreReducer';
 import ComplexityReducer from './ComplexityReducer';
 import EnableGameReducer from './EnableGameReducer';
 import BoardReducer from './BoardReducer';
-import ScoresReducer from './FetchReducer';
-
+import FetchReducer from './FetchReducer';
+import ScoresReducer from './ScoresReducer';
 
 const rootReducer = combineReducers({
   GameSettingsReducer,
@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
   ComplexityReducer,
   EnableGameReducer,
   BoardReducer,
+  FetchReducer,
   ScoresReducer
 });
 

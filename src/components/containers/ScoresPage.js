@@ -13,12 +13,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 export class HighScorePage extends React.Component {
   componentDidMount() {
-    this.props.scoreActions.fetchStart();
+    this.props.fetchActions.fetchStart();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.loading) {
-      this.props.scoreActions.fetchSuccess();
+      this.props.fetchActions.fetchSuccess(localStorage.getItem('scores'));
     }
   }
 
@@ -69,13 +69,14 @@ export class HighScorePage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    loading: state.ScoresReducer
+    loading: state.FetchReducer,
+    scores: state.ScoresReducer
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    scoreActions: bindActionCreators(scoreActions, dispatch)
+    fetchActions: bindActionCreators(scoreActions, dispatch),
   };
 }
 

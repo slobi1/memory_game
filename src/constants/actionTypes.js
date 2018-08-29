@@ -13,3 +13,5 @@ export const SET_CARD_TO_RESOLVED = 'SET_CARD_TO_RESOLVED';
 export const SAVE_SCORE = 'SAVE_SCORE';
 export const FETCH_START = 'FETCH_START';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const GET_SCORES = 'GET_SCORES';
+export const SAVE_SCORES = 'SAVE_SCORES';
