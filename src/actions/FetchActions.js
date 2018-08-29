@@ -15,6 +15,6 @@ export function fetchSuccess(data) {
           data
         }
       )
-    }, 2500);
+    }, 1000);
   }
 }
