@@ -6,12 +6,13 @@ export function fetchStart() {
   }
 }
 
-export function fetchSuccess() {
+export function fetchSuccess(data) {
   return function (dispatch) {
     setTimeout(() => {
       dispatch(
         {
-          type: types.FETCH_SUCCESS
+          type: types.FETCH_SUCCESS,
+          data
         }
       )
     }, 2500);

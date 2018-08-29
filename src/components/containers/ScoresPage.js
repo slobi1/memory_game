@@ -10,6 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {v4} from 'uuid';
 
 export class HighScorePage extends React.Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ export class HighScorePage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.loading) {
-      this.props.fetchActions.fetchSuccess(localStorage.getItem('scores'));
+      this.props.fetchActions.fetchSuccess(JSON.parse(localStorage.getItem('scores')));
     }
   }
 
@@ -49,14 +50,20 @@ export class HighScorePage extends React.Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      Slobodan Boba Djordjevic
-                    </TableCell>
-                    <TableCell numeric>
-                      100
-                    </TableCell>
-                  </TableRow>
+                  {
+                    this.props.scores.map((score) => {
+                      return (
+                        <TableRow key={v4()}>
+                          <TableCell>
+                            {score.name}
+                          </TableCell>
+                          <TableCell numeric>
+                            {score.score}
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })
+                  }
                 </TableBody>
               </Table>
             )}
