@@ -31,8 +31,8 @@ export class HighScorePage extends React.Component {
             <h2>Score table</h2>
             <Divider light />
           </Grid>
-          <Grid xs={4} item></Grid>
-          <Grid xs={4} item>
+          <Grid xs={4} lg={5} item></Grid>
+          <Grid xs={4} lg={2} item>
             {this.props.loading ? (
               <div>
                 <CircularProgress size={50} />
