@@ -23,8 +23,19 @@ class SaveScoreDialogComponent extends React.Component {
   }
 
   handleSave = () => {
-    localStorage.setItem(this.state.inputValue, this.props.gameScore);
+    let scores = localStorage.getItem('scores');
+    const toSave = {[this.state.inputValue]: this.props.gameScore};
+
+    if (scores) {
+      let localstore = JSON.parse(scores);
+      localstore.push(toSave);
+      localStorage.setItem('scores', JSON.stringify(localstore));
+    } else {
+      localStorage.setItem('scores', JSON.stringify([toSave]));
+    }
+
     this.props.handleClose();
+    this.setState({inputValue: ''});
   }
 
   render() {
