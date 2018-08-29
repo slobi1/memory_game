@@ -20,8 +20,7 @@ export class MemoryGamePage extends React.Component {
 
     this.state = {
       dialogOpened: false,
-      dialogTitle: '',
-      dialogText: ''
+      dialogTitle: ''
     }
   }
 
@@ -48,8 +47,7 @@ export class MemoryGamePage extends React.Component {
         if (nextProps.gameScore >= 0) {
           this.setState({
             dialogOpened: true,
-            dialogTitle: 'Congratulations!',
-            dialogText: `You won. Your score is ${this.props.gameScore}. Enter your name to save your score.`
+            dialogTitle: 'Congratulations! You won.'
           });
         } else {
           this.setState({

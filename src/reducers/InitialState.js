@@ -12,5 +12,6 @@ export default {
     }
   },
   board: [],
-  score: 0
+  score: 0,
+  scoreData: []
 }
