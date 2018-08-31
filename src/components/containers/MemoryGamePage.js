@@ -43,19 +43,17 @@ export class MemoryGamePage extends React.Component {
     }
 
     if (nextProps.gameSettings.resolved.length === this.props.complexity.pairs && nextProps.gameScore !== this.props.gameScore) {
-      setTimeout(() => {
-        if (nextProps.gameScore >= 0) {
-          this.setState({
-            dialogOpened: true,
-            dialogTitle: 'Congratulations! You won.'
-          });
-        } else {
-          this.setState({
-            dialogOpened: true,
-            dialogTitle: 'You lost :('
-          });
-        }
-      });
+      if (nextProps.gameScore >= 0) {
+        this.setState({
+          dialogOpened: true,
+          dialogTitle: 'Congratulations! You won.'
+        });
+      } else {
+        this.setState({
+          dialogOpened: true,
+          dialogTitle: 'You lost :('
+        });
+      }
     }
   }
 

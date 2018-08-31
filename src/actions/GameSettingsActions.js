@@ -1,12 +1,12 @@
 import * as types from '../constants/actionTypes';
 
-export function hideAll() {
+export const hideAll = () => {
   return {
     type: types.HIDE_ALL,
   }
 }
 
-export function resetMatched() {
+export const resetMatched = () => {
   return {
     type: types.RESET_MATCHED
   }

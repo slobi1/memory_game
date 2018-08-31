@@ -1,13 +1,13 @@
 import * as types from '../constants/actionTypes';
 
-export function updateScore(points) {
+export const updateScore = points => {
   return {
     type: types.UPDATE_SCORE,
     points
   }
 }
 
-export function resetScore() {
+export const resetScore = () =>  {
   return {
     type: types.RESET_SCORE
   }

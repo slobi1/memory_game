@@ -1,12 +1,12 @@
 import * as types from "../constants/actionTypes";
 
-export function fetchStart() {
+export const fetchStart = () => {
   return {
     type: types.FETCH_START
   }
 }
 
-export function fetchSuccess(data) {
+export const fetchSuccess = data => {
   return function (dispatch) {
     setTimeout(() => {
       dispatch(

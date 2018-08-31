@@ -1,16 +1,16 @@
 import * as types from '../constants/actionTypes';
 
-export function flipCard(cardKey, xlocation, ylocation, value) {
+export const flipCard = ({uniquekey, xlocation, ylocation, symbol}) => {
   return {
     type: types.FLIP_CARD,
-    cardKey,
+    uniquekey,
     xlocation,
     ylocation,
-    value
+    symbol
   }
 }
 
-export function flipBack(locations) {
+export const flipBack = locations => {
   return {
     type: types.FLIP_BACK,
     locations

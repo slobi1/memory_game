@@ -8,11 +8,11 @@ export default function GameSettingsReducer(state = InitialState.settings, actio
       const flippedCardsCount = Object.keys(state.values).length;
 
       newState.locations[flippedCardsCount] = {x: action.xlocation, y: action.ylocation};
-      newState.values[flippedCardsCount] = action.value;
+      newState.values[flippedCardsCount] = action.symbol;
 
       if (newState.values.length === 2) {
         if (newState.values[0] === newState.values[1]) {
-          newState.resolved[newState.resolved.length] = action.value;
+          newState.resolved[newState.resolved.length] = action.symbol;
 
           newState.locations = [];
           newState.values = [];

@@ -6,7 +6,7 @@ const Card = (props) => {
         onClick={
           () => {
             if (props.enableGame && !props.flipped && props.cardsFlipped < 2) {
-              props.handleClick(props.uniquekey, props.xlocation, props.ylocation, props.symbol)
+              props.handleClick(props)
             }
           }
         }
