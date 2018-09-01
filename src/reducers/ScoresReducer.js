@@ -11,7 +11,6 @@ export default function ScoresReducer(state = InitialState.scoreData, action) {
       return state;
     }
 
-    default:
-      return state;
+    default: return state;
   }
 }

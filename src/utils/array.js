@@ -10,9 +10,38 @@ class GenerateNewItem {
   }
 }
 
-export function getShuffled(difficulty, columns) {
-  let board = [];
-  let symbols = [];
+class PopulateBoard {
+  constructor(props) {
+    Object.assign(this, props)
+  }
+
+  shuffle() {
+    let board = [];
+    let shuffledBoard = shuffle(this.symbols);
+    let index = 0;
+    let rows = 0;
+
+    // Make matrix based on number of columns
+    shuffledBoard.forEach(symbol => {
+      if (index === 0) {
+        board.push([]);
+      }
+
+      board[rows].push(symbol);
+      index++;
+
+      if (index === this.columns) {
+        index = 0;
+        rows++;
+      }
+    });
+
+    return board;
+  }
+}
+
+export const getShuffled = (difficulty, columns) => {
+  let symbols = [];   
   let collection = [
     'fa-truck-monster',
     'fa-apple-alt',
@@ -32,24 +61,5 @@ export function getShuffled(difficulty, columns) {
     symbols.push(new GenerateNewItem(char));
   }
 
-  let shuffledBoard = shuffle(symbols);
-  let index = 0;
-  let rows = 0;
-
-  // Make matrix based on number of columns
-  shuffledBoard.forEach(symbol => {
-    if (index === 0) {
-      board.push([]);
-    }
-
-    board[rows].push(symbol);
-    index++;
-
-    if (index === columns) {
-      index = 0;
-      rows++;
-    }
-  });
-
-  return board;
+  return new PopulateBoard({symbols, columns}).shuffle();
 }

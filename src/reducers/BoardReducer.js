@@ -4,9 +4,7 @@ import * as utilActions from "../utils/array";
 
 export default function BoardReducer(state = InitialState.board, action) {
   switch (action.type) {
-    case actions.RESET_BOARD: {
-      return utilActions.getShuffled(action.difficulty, action.x);
-    }
+    case actions.RESET_BOARD: return utilActions.getShuffled(action.difficulty, action.x);
 
     case actions.FLIP_CARD: {
       const newState = Object.assign([], state);
@@ -49,7 +47,6 @@ export default function BoardReducer(state = InitialState.board, action) {
       return newState;
     }
 
-    default:
-      return state;
+    default: return state;
   }
 }
